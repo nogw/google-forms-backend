@@ -35,70 +35,58 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
         if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
     }
 };
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
-var form_model_1 = require("../models/form.model");
-var create = function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
-    var form;
-    return __generator(this, function (_a) {
-        try {
-            form = new form_model_1.default({
-                user_id: req.body.user_id,
-                title: req.body.title,
-                description: req.body.description,
-                data: req.body.data,
-                cards: req.body.cards
-            });
-            form.save()
-                .then(function (form) {
-                return res.status(200).json({
-                    message: "created form",
-                    link: "" + form._id
-                });
-            })
-                .catch(function (error) {
-                return res.status(400).json({
-                    messageError: error
-                });
-            });
-        }
-        catch (error) {
-            return [2 /*return*/, res.status(400).json({
-                    messageError: error
-                })];
-        }
-        return [2 /*return*/];
-    });
-}); };
-var updateForm = function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
-    var formUpd;
-    return __generator(this, function (_a) {
-        formUpd = {
-            user_id: req.body.user_id,
-            title: req.body.title,
-            description: req.body.description,
-            cards: req.body.cards
-        };
-        form_model_1.default.findOneAndUpdate({ _id: req.body._id }, formUpd, { upsert: true, new: true }, function (err, doc) {
-            if (err) {
-                console.log("Something wrong when updating data!");
-            }
-            console.log(doc);
+var answer_model_1 = __importDefault(require("../models/answer.model"));
+var createAnswer = function (req, res) {
+    try {
+        var answer = new answer_model_1.default({
+            form_id: req.body.form_id,
+            user_prop_id: req.body.user_prop_id,
+            author: req.body.author,
+            date: req.body.date,
+            answers: req.body.answers
         });
-        return [2 /*return*/];
-    });
-}); };
-var getMyForms = function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
-    var forms, error_1;
+        answer.save()
+            .then(function (answer) {
+            return res.status(200).json({
+                message: "success in responding"
+            });
+        })
+            .catch(function (error) {
+            return res.status(400).json({
+                messageError: error
+            });
+        });
+    }
+    catch (error) {
+        return res.status(400).json({
+            messageError: error
+        });
+    }
+};
+var getAnswer = function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
+    var answer, error_1;
     return __generator(this, function (_a) {
         switch (_a.label) {
             case 0:
                 _a.trys.push([0, 2, , 3]);
-                return [4 /*yield*/, form_model_1.default.find({ user_id: req.query.id }, { 'id': 1, 'user_id': 1, 'title': 1, 'data': 1 }).exec()];
+                return [4 /*yield*/, answer_model_1.default.find({ form_id: req.query.idForm }).exec()];
             case 1:
-                forms = _a.sent();
-                return [2 /*return*/, res.status(200).json({
-                        results: forms
-                    })];
+                answer = _a.sent();
+                if (answer != null) {
+                    return [2 /*return*/, res.status(200).json({
+                            result: answer
+                        })];
+                }
+                else {
+                    return [2 /*return*/, res.status(400).json({
+                            messageError: "0 replies"
+                        })];
+                }
+                return [3 /*break*/, 3];
             case 2:
                 error_1 = _a.sent();
                 return [2 /*return*/, res.status(400).json({
@@ -108,39 +96,7 @@ var getMyForms = function (req, res) { return __awaiter(void 0, void 0, void 0, 
         }
     });
 }); };
-var getForm = function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
-    var form, error_2;
-    return __generator(this, function (_a) {
-        switch (_a.label) {
-            case 0:
-                _a.trys.push([0, 2, , 3]);
-                return [4 /*yield*/, form_model_1.default.findById(req.query.idForm).populate("answers").exec()];
-            case 1:
-                form = _a.sent();
-                if (form != null) {
-                    return [2 /*return*/, res.status(200).json({
-                            message: "achei",
-                            result: form
-                        })];
-                }
-                else {
-                    return [2 /*return*/, res.status(400).json({
-                            messageError: "user not found"
-                        })];
-                }
-                return [3 /*break*/, 3];
-            case 2:
-                error_2 = _a.sent();
-                return [2 /*return*/, res.status(400).json({
-                        messageError: error_2
-                    })];
-            case 3: return [2 /*return*/];
-        }
-    });
-}); };
 exports.default = {
-    create: create,
-    getMyForms: getMyForms,
-    getForm: getForm,
-    updateForm: updateForm
+    createAnswer: createAnswer,
+    getAnswer: getAnswer
 };

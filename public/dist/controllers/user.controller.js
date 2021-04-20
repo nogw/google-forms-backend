@@ -35,12 +35,15 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
         if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
     }
 };
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
-var bcryptjs_1 = require("bcryptjs");
-var jsonwebtoken_1 = require("jsonwebtoken");
-var user_model_1 = require("../models/user.model");
-var validateRegister_1 = require("../validation/validateRegister");
-var validateLogin_1 = require("../validation/validateLogin");
+var bcryptjs_1 = __importDefault(require("bcryptjs"));
+var jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
+var user_model_1 = __importDefault(require("../models/user.model"));
+var validateRegister_1 = __importDefault(require("../validation/validateRegister"));
+var validateLogin_1 = __importDefault(require("../validation/validateLogin"));
 var register = function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
     var _a, errors, isValid, user, error_1;
     return __generator(this, function (_b) {

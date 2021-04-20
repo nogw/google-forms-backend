@@ -1,7 +1,10 @@
 "use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
-var validator_1 = require("validator");
-var isEmpty_1 = require("./isEmpty");
+var validator_1 = __importDefault(require("validator"));
+var isEmpty_1 = __importDefault(require("./isEmpty"));
 var validateRegister = function (data) {
     var errors = {};
     data.name = !isEmpty_1.default(data.name) ? data.name : '';
