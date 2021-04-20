@@ -1,0 +1,10 @@
+{
+  "compilerOptions": {
+      "module": "commonjs",
+      "target": "ES5",
+      "watch": true,
+      "project":"public/app/**/*.tsx",
+      "outDir": "public/dist",
+      "jsx": "react"
+  }
+}
