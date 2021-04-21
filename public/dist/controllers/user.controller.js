@@ -114,7 +114,9 @@ var login = function (req, res) { return __awaiter(void 0, void 0, void 0, funct
             case 0:
                 _a = validateLogin_1.default(req.body), errors = _a.errors, isValid = _a.isValid;
                 if (!isValid) {
-                    return [2 /*return*/, res.status(400).json(errors)];
+                    return [2 /*return*/, res.status(400).json({
+                        messageError: errors
+                    })];
                 }
                 _b.label = 1;
             case 1:
