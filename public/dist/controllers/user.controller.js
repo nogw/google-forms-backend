@@ -126,7 +126,7 @@ var login = function (req, res) { return __awaiter(void 0, void 0, void 0, funct
                 user_1 = _b.sent();
                 if (!user_1) {
                     return [2 /*return*/, res.status(400).json({
-                            email: 'Could not find email.',
+                            messageError: 'Could not find email.',
                         })];
                 }
                 return [2 /*return*/, bcryptjs_1.default.compare(password, user_1.password, function (err, result) {
@@ -148,13 +148,13 @@ var login = function (req, res) { return __awaiter(void 0, void 0, void 0, funct
                         }
                         else {
                             return res.status(400).json({
-                                message: 'Password does not matched!',
+                                messageError: 'Password does not matched!',
                             });
                         }
                     })];
             case 3:
                 err_1 = _b.sent();
-                return [2 /*return*/, res.status(400).json({ message: err_1 })];
+                return [2 /*return*/, res.status(400).json({ messageError: err_1 })];
             case 4: return [2 /*return*/];
         }
     });
